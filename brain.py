@@ -3,11 +3,14 @@ from agents import GlowAgents
 
 def process_glow_query(user_profile, query, active_modes):
     """
-    Runs selected expert agents and optionally synthesizes
-    the responses into one final roadmap.
+    Runs the selected expert agents and combines their responses.
     """
 
     expert_outputs = {}
+
+    # -----------------------------
+    # Individual Expert Agents
+    # -----------------------------
 
     try:
 
@@ -55,28 +58,41 @@ def process_glow_query(user_profile, query, active_modes):
                 ).content
             )
 
-        if len(expert_outputs) > 1:
-
-            combined = "\n\n".join(
-                f"{k}\n{v}"
-                for k, v in expert_outputs.items()
-            )
-
-           brain = GlowAgents.get_general_brain()
-
-        if brain:
-
-           expert_outputs["✨ Master Glow Roadmap"] = (
-                brain.invoke(
-            {
-                "expert_responses": combined
-            }
-        ).content
-    )
-
     except Exception as e:
 
-        expert_outputs["❌ Error"] = str(e)
+        expert_outputs["❌ Expert Error"] = str(e)
+
+    # -----------------------------
+    # Master AI Summary
+    # -----------------------------
+
+    if len(expert_outputs) > 1:
+
+        try:
+
+            combined = "\n\n".join(
+                [f"{k}\n{v}" for k, v in expert_outputs.items()]
+            )
+
+            brain = GlowAgents.get_general_brain()
+
+            if brain is not None:
+
+                expert_outputs["✨ Master Glow Roadmap"] = (
+                    brain.invoke(
+                        {
+                            "expert_responses": combined
+                        }
+                    ).content
+                )
+
+        except Exception as e:
+
+            expert_outputs["⚠️ Master AI Error"] = str(e)
+
+    # -----------------------------
+    # Empty Response
+    # -----------------------------
 
     if not expert_outputs:
 
