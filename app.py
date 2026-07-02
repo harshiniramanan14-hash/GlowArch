@@ -1,46 +1,38 @@
 import streamlit as st
 from brain import process_glow_query
 
+# -------------------------------------------------
+# Page Configuration
+# -------------------------------------------------
+
 st.set_page_config(
-    page_title="GlowArchitect",
+    page_title="✨ GlowArchitect",
     page_icon="✨",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
 )
 
-# ---------------- CSS ---------------- #
+# -------------------------------------------------
+# Custom CSS
+# -------------------------------------------------
 
 st.markdown("""
 <style>
 
 .stApp{
-background: linear-gradient(135deg,#FFF6F9,#FFFDF8,#EEF6FF);
+    background: linear-gradient(135deg,#FFF7FB,#F7F4FF,#EEF7FF);
 }
 
-/* Hide Streamlit Branding */
-#MainMenu {visibility:hidden;}
-footer {visibility:hidden;}
-header {visibility:hidden;}
-
-.hero{
-background:rgba(255,255,255,0.75);
-padding:30px;
-border-radius:25px;
-box-shadow:0px 10px 35px rgba(0,0,0,.08);
-backdrop-filter: blur(20px);
-text-align:center;
-margin-bottom:20px;
+#MainMenu{
+visibility:hidden;
 }
 
-.hero h1{
-font-size:48px;
-font-weight:800;
-color:#5A189A;
+footer{
+visibility:hidden;
 }
 
-.hero p{
-font-size:18px;
-color:#555;
+header{
+visibility:hidden;
 }
 
 .block-container{
@@ -48,113 +40,121 @@ padding-top:2rem;
 padding-bottom:2rem;
 }
 
-section[data-testid="stSidebar"]{
-background:linear-gradient(180deg,#5A189A,#9D4EDD);
-color:white;
+.hero{
+background:rgba(255,255,255,0.80);
+padding:30px;
+border-radius:25px;
+box-shadow:0px 10px 30px rgba(0,0,0,.08);
+text-align:center;
+margin-bottom:20px;
 }
 
-section[data-testid="stSidebar"] label{
-color:white !important;
+.hero h1{
+font-size:52px;
+color:#6A0DAD;
+font-weight:800;
 }
 
-.stButton>button{
-width:100%;
-background:linear-gradient(90deg,#7B2CBF,#C77DFF);
-color:white;
-font-weight:bold;
-border:none;
-border-radius:15px;
-padding:14px;
+.hero p{
 font-size:18px;
-transition:0.3s;
-}
-
-.stButton>button:hover{
-transform:scale(1.02);
-box-shadow:0 10px 25px rgba(123,44,191,.35);
-}
-
-.card{
-background:white;
-padding:20px;
-border-radius:20px;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
-margin-bottom:15px;
-}
-
-textarea{
-border-radius:15px !important;
-}
-
-div[data-baseweb="select"]{
-border-radius:15px;
+color:#555;
 }
 
 .metric{
 background:white;
 padding:18px;
-border-radius:20px;
+border-radius:18px;
 text-align:center;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
+box-shadow:0px 6px 15px rgba(0,0,0,.08);
 }
 
 .metric h2{
 color:#7B2CBF;
-margin-bottom:0;
+margin:0;
 }
 
 .metric p{
 color:gray;
 }
 
+.stButton>button{
+width:100%;
+background:linear-gradient(90deg,#7B2CBF,#C77DFF);
+color:white;
+border:none;
+border-radius:15px;
+padding:12px;
+font-size:18px;
+font-weight:bold;
+}
+
+.stButton>button:hover{
+transform:scale(1.02);
+}
+
+textarea{
+border-radius:15px !important;
+}
+
+section[data-testid="stSidebar"]{
+background:linear-gradient(180deg,#5A189A,#7B2CBF);
+}
+
+section[data-testid="stSidebar"] *{
+color:white;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------- HERO ---------------- #
+# -------------------------------------------------
+# Hero Section
+# -------------------------------------------------
 
 st.markdown("""
 <div class="hero">
-
 <h1>✨ GlowArchitect</h1>
-
 <p>
-Open-Source Multi-Agent Cosmeceutical Intelligence Platform
+Open-Source Multi-Agent Cosmeceutical & Skincare Intelligence Platform
 </p>
-
 </div>
 """, unsafe_allow_html=True)
 
-# ---------------- Dashboard ---------------- #
+# -------------------------------------------------
+# Dashboard
+# -------------------------------------------------
 
-col1,col2,col3=st.columns(3)
+col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown("""
     <div class="metric">
     <h2>4</h2>
-    <p>AI Specialists</p>
+    <p>AI Experts</p>
     </div>
-    """,unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 with col2:
     st.markdown("""
     <div class="metric">
     <h2>24/7</h2>
-    <p>Personal Skin Assistant</p>
+    <p>Personal Assistant</p>
     </div>
-    """,unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 with col3:
     st.markdown("""
     <div class="metric">
-    <h2>100%</h2>
-    <p>Personalized Recommendations</p>
+    <h2>Smart</h2>
+    <p>Routine Builder</p>
     </div>
-    """,unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 st.write("")
 
-# ---------------- Sidebar ---------------- #
+# -------------------------------------------------
+# Sidebar
+# -------------------------------------------------
 
 with st.sidebar:
 
@@ -167,8 +167,8 @@ with st.sidebar:
             "Dry",
             "Oily",
             "Combination",
-            "Sensitive"
-        ]
+            "Sensitive",
+        ],
     )
 
     concerns = st.multiselect(
@@ -181,8 +181,8 @@ with st.sidebar:
             "Dullness",
             "Dark Circles",
             "Open Pores",
-            "Pigmentation"
-        ]
+            "Pigmentation",
+        ],
     )
 
     climate = st.selectbox(
@@ -192,8 +192,8 @@ with st.sidebar:
             "Dry",
             "Cold",
             "Hot",
-            "Mixed"
-        ]
+            "Mixed",
+        ],
     )
 
     st.divider()
@@ -206,79 +206,97 @@ with st.sidebar:
             "Skincare Expert",
             "Cosmetic Chemist",
             "Natural Remedies",
-            "Facial Fitness"
+            "Facial Fitness",
         ],
-        default=["Skincare Expert"]
+        default=["Skincare Expert"],
     )
 
-# ---------------- User Profile ---------------- #
+# -------------------------------------------------
+# User Profile
+# -------------------------------------------------
 
 user_profile = f"""
-Skin Type : {skin_type}
-
-Concerns : {', '.join(concerns)}
-
-Climate : {climate}
+Skin Type: {skin_type}
+Concerns: {", ".join(concerns)}
+Climate: {climate}
 """
 
-# ---------------- Query ---------------- #
+# -------------------------------------------------
+# Query
+# -------------------------------------------------
 
-st.markdown("## 💬 Ask GlowArchitect")
+st.subheader("💬 Ask GlowArchitect")
 
 query = st.text_area(
     "",
+    height=220,
     placeholder="""
 Example:
 
 • Build my AM & PM skincare routine
 
-• Suggest products for oily acne-prone skin
+• Suggest products for acne-prone skin
 
-• Recommend home remedies for pigmentation
+• Recommend home remedies
 
-• How do I repair my skin barrier?
+• Help repair my skin barrier
 
-• Best routine for Bangalore humid weather
+• Best skincare for humid weather
 """,
-    height=220
 )
 
-# ---------------- Button ---------------- #
+# -------------------------------------------------
+# Generate Button
+# -------------------------------------------------
 
 if st.button("✨ Generate Personalized Routine"):
 
-    if query == "":
+    if not query.strip():
         st.warning("Please enter your skincare concern.")
+        st.stop()
 
-    elif len(active_modes) == 0:
+    if not active_modes:
         st.warning("Please activate at least one expert.")
+        st.stop()
 
-    else:
+    with st.spinner("🧠 Consulting AI Experts..."):
 
-        with st.spinner("🧠 Multi-Agent Intelligence Working..."):
-
+        try:
             results = process_glow_query(
-                user_profile,
-                query,
-                active_modes
+                user_profile=user_profile,
+                query=query,
+                active_modes=active_modes,
             )
 
-        st.success("Analysis Complete!")
+        except Exception as e:
+            st.error(f"Error: {e}")
+            st.stop()
 
-        st.divider()
+    if not results:
+        st.warning("No recommendations were generated.")
+        st.stop()
 
- if results:
-    tabs = st.tabs(list(results.keys()))
+    st.success("✅ Analysis Complete!")
 
-    for tab, (name, response) in zip(tabs, results.items()):
+    st.divider()
+
+    tab_names = list(results.keys())
+
+    tabs = st.tabs(tab_names)
+
+    for tab, (title, response) in zip(tabs, results.items()):
+
         with tab:
+
+            st.markdown(f"## {title}")
             st.markdown(response)
 
-else:
-    st.error("No results were generated.")  
+# -------------------------------------------------
+# Footer
+# -------------------------------------------------
 
+st.markdown("---")
 
-
-st.write("")
-st.write("")
-st.caption("✨ Powered by Groq • Gemini • LangChain • Streamlit")
+st.caption(
+    "✨ Powered by Groq • Gemini • LangChain • Streamlit"
+)
