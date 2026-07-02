@@ -267,24 +267,16 @@ if st.button("✨ Generate Personalized Routine"):
 
         st.divider()
 
-        tabs = st.tabs(results.keys())
+        if results:
 
-        for i,(name,response) in enumerate(results.items()):
+    tabs = st.tabs(list(results.keys()))
 
-            with tabs[i]:
+    for tab, (name, response) in zip(tabs, results.items()):
+        with tab:
+            st.markdown(response)
 
-                st.markdown(
-                    f"""
-<div class="card">
-
-# {name}
-
-{response}
-
-</div>
-""",
-                    unsafe_allow_html=True
-                )
+else:
+    st.error("No results were generated.")
 
 st.write("")
 st.write("")
