@@ -61,12 +61,17 @@ groq_llm = ChatGroq(
     temperature=0.3,
 )
 
-gemini_llm = ChatGoogleGenerativeAI(
-    google_api_key=GOOGLE_API_KEY,
-    model="gemini-1.5-flash",
-    temperature=0.4,
-)
+try:
 
+    gemini_llm = ChatGoogleGenerativeAI(
+        google_api_key=GOOGLE_API_KEY,
+        model="gemini-1.5-flash",
+        temperature=0.4,
+    )
+
+except Exception:
+
+    gemini_llm = None
 # --------------------------------------------------
 # GlowAgents
 # --------------------------------------------------
@@ -206,16 +211,18 @@ User Profile:
 
     @staticmethod
     def get_general_brain():
+       
+    if gemini_llm is None:
+        return None
 
-        prompt = ChatPromptTemplate.from_messages(
-            [
-                (
-                    "system",
-                    """
+    prompt = ChatPromptTemplate.from_messages(
+        [
+            (
+                "system",
+                """
 You are GlowArchitect's Master AI.
 
-You receive outputs from multiple experts.
-
+Combine all expert opinions into one final skincare roadmap.
 Combine everything into:
 
 1. Executive Summary
@@ -234,11 +241,12 @@ Combine everything into:
 
 Remove conflicting advice.
 
-Return a concise and actionable skincare roadmap.
-                    """,
-                ),
-                ("human", "{expert_responses}"),
-            ]
-        )
+                """,
+            ),
+            ("human", "{expert_responses}"),
+        ]
+    )
 
-        return prompt | gemini_llm
+    return prompt | gemini_llm
+
+
