@@ -269,6 +269,7 @@ if st.button("✨ Generate Personalized Routine"):
             )
 
         except Exception as e:
+            
             st.error(f"Error: {e}")
             st.stop()
 
