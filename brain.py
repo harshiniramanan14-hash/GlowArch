@@ -30,4 +30,11 @@ def process_glow_query(user_profile, query, active_modes):
         summary = brain.invoke({"expert_responses": combined_text}).content
         expert_outputs["Master Synthesis Roadmap"] = summary
 
-    return expert_outputs
+    if not expert_outputs:
+    expert_outputs["Error"] = (
+        "No expert responses were generated. "
+        "Please check the selected experts and your API configuration."
+    )
+
+return expert_outputs
+
