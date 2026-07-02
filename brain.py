@@ -62,15 +62,17 @@ def process_glow_query(user_profile, query, active_modes):
                 for k, v in expert_outputs.items()
             )
 
-            brain = GlowAgents.get_general_brain()
+           brain = GlowAgents.get_general_brain()
 
-            expert_outputs["✨ Master Glow Roadmap"] = (
+        if brain:
+
+           expert_outputs["✨ Master Glow Roadmap"] = (
                 brain.invoke(
-                    {
-                        "expert_responses": combined
-                    }
-                ).content
-            )
+            {
+                "expert_responses": combined
+            }
+        ).content
+    )
 
     except Exception as e:
 
