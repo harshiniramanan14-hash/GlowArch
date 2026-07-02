@@ -2,17 +2,32 @@ import os
 from langchain_groq import ChatGroq
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
+import streamlit as st
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# Initialize LLMs with active production model strings
-# Groq Llama 3.3 70B for fast domain-expert reasoning
-groq_llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.3)
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
-# Google Gemini 1.5 Flash for high-context overview synthesis
-gemini_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.4)
+if not GOOGLE_API_KEY:
+    GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
 
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+
+if not GROQ_API_KEY:
+    GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
+
+groq_llm = ChatGroq(
+    model="llama-3.3-70b-versatile",
+    temperature=0.3,
+    api_key=GROQ_API_KEY
+)
+
+gemini_llm = ChatGoogleGenerativeAI(
+    model="gemini-1.5-flash",
+    google_api_key=GOOGLE_API_KEY,
+    temperature=0.4
+)
 class GlowAgents:
     @staticmethod
     def get_skincare_expert(user_profile, query):
