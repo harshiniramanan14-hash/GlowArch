@@ -6,11 +6,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Initialize LLMs
-# Groq for high-speed expert responses
-groq_llm = ChatGroq(model="llama3-70b-8192", temperature=0.3)
-# Gemini for deep contextual synthesis
+groq_llm = ChatGroq(model="llama-3.1-70b-versatile", temperature=0.3)
+
 gemini_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.4)
+
 
 class GlowAgents:
     @staticmethod
