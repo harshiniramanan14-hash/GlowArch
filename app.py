@@ -267,8 +267,7 @@ if st.button("✨ Generate Personalized Routine"):
 
         st.divider()
 
-        if results:
-
+ if results:
     tabs = st.tabs(list(results.keys()))
 
     for tab, (name, response) in zip(tabs, results.items()):
@@ -276,7 +275,9 @@ if st.button("✨ Generate Personalized Routine"):
             st.markdown(response)
 
 else:
-    st.error("No results were generated.")
+    st.error("No results were generated.")  
+
+
 
 st.write("")
 st.write("")
