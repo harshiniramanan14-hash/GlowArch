@@ -1,6 +1,4 @@
 from agents import GlowAgents
-
-
 def process_glow_query(user_profile, query, active_modes):
     """
     Runs the selected expert agents and combines their responses.
