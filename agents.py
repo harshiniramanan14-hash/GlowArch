@@ -6,10 +6,12 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-groq_llm = ChatGroq(model="llama-3.1-70b-versatile", temperature=0.3)
+# Initialize LLMs with active production model strings
+# Groq Llama 3.3 70B for fast domain-expert reasoning
+groq_llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=0.3)
 
+# Google Gemini 1.5 Flash for high-context overview synthesis
 gemini_llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.4)
-
 
 class GlowAgents:
     @staticmethod
@@ -56,7 +58,6 @@ class GlowAgents:
 
     @staticmethod
     def get_general_brain():
-        # High-level coordinator agent to synthesize summaries
         prompt = ChatPromptTemplate.from_messages([
             ("system", """You are the Core Intelligence of GlowArchitect. Synthesize the inputs from your specialized experts 
              into a clean, cohesive, actionable daily roadmap for the user. Ensure no conflicting advice exists."""),
