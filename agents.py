@@ -209,9 +209,9 @@ User Profile:
 
         return prompt | groq_llm
 
-    @staticmethod
-    def get_general_brain():
-       
+  @staticmethod
+def get_general_brain():
+
     if gemini_llm is None:
         return None
 
@@ -222,25 +222,9 @@ User Profile:
                 """
 You are GlowArchitect's Master AI.
 
-Combine all expert opinions into one final skincare roadmap.
-Combine everything into:
+You receive outputs from multiple experts.
 
-1. Executive Summary
-
-2. Morning Routine
-
-3. Evening Routine
-
-4. Weekly Treatments
-
-5. Ingredients to Use
-
-6. Ingredients to Avoid
-
-7. Lifestyle Advice
-
-Remove conflicting advice.
-
+Combine everything into one skincare roadmap.
                 """,
             ),
             ("human", "{expert_responses}"),
@@ -248,5 +232,3 @@ Remove conflicting advice.
     )
 
     return prompt | gemini_llm
-
-
